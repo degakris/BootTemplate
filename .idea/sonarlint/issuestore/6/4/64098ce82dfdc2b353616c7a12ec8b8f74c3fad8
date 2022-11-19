@@ -1,0 +1,7 @@
+
+U
+java:S1854"?Remove this useless assignment to local variable "bookingList".(÷¼ı
+F
+java:S1481"0Remove this unused "bookingList" local variable.(÷¼ı
+H
+java:S1168"+Return an empty collection instead of null.(¥¹ï8İêØÛÖ/

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TimestampToDateDeserializer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">LibraryManagement</a> &gt; <a href="index.source.html" class="el_package">com.noon.libmanagement.serializer</a> &gt; <span class="el_source">TimestampToDateDeserializer.java</span></div><h1>TimestampToDateDeserializer.java</h1><pre class="source lang-java linenums">package com.noon.libmanagement.serializer;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+
+import java.io.IOException;
+
+<span class="nc" id="L13">@Slf4j</span>
+<span class="nc" id="L14">public class TimestampToDateDeserializer extends JsonDeserializer&lt;DateTime&gt; {</span>
+	@Override
+	public DateTime deserialize(JsonParser p, DeserializationContext context) throws IOException {
+<span class="nc" id="L17">		DateTime date = null;</span>
+<span class="nc" id="L18">		String timestamp = p.readValueAs(String.class);</span>
+<span class="nc bnc" id="L19" title="All 2 branches missed.">		if (StringUtils.isNotBlank(timestamp)) {</span>
+			try {
+<span class="nc" id="L21">				date = new DateTime(Long.getLong(timestamp));</span>
+<span class="nc" id="L22">			} catch (Exception e) {</span>
+<span class="nc" id="L23">				log.error(&quot;error in parsing date&quot;, e);</span>
+				try {
+<span class="nc" id="L25">					date = DateTime.parse(timestamp, DateTimeFormat.forPattern(&quot;yyyy-MM-dd'T'hh:mm:ss.SSS&quot;));</span>
+<span class="nc" id="L26">				} catch (Exception ex) {</span>
+<span class="nc" id="L27">					log.error(&quot;error in parsing date&quot;, ex);</span>
+<span class="nc" id="L28">				}</span>
+<span class="nc" id="L29">			}</span>
+		}
+<span class="nc" id="L31">		return date;</span>
+	}
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

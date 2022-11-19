@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.noon.libmanagement.exceptions.interceptor.GlobalResponseDtoExceptionInterceptorTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.274 s - in com.noon.libmanagement.exceptions.interceptor.GlobalResponseDtoExceptionInterceptorTest

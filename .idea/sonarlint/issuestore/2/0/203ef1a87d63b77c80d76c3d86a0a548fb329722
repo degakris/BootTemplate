@@ -1,0 +1,29 @@
+
+k	java:S100†"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·ÕÜ³8Î‰ÏØÖ/
+k	java:S100¿"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿóüÄ8ó‰ÏØÖ/
+i
+java:S11925"LDefine a constant instead of duplicating this literal "methodName3" 8 times.(ûÉåÂ8”ŠÏØÖ/
+i
+java:S11924"LDefine a constant instead of duplicating this literal "methodName2" 8 times.(‹§Ù¥8–ŠÏØÖ/
+h
+java:S11923"LDefine a constant instead of duplicating this literal "methodName1" 8 times.(¯òûC8—ŠÏØÖ/
+g
+java:S11923"KDefine a constant instead of duplicating this literal "ClassName1" 8 times.(¯òûC8—ŠÏØÖ/
+h
+java:S11924"KDefine a constant instead of duplicating this literal "ClassName2" 8 times.(‹§Ù¥8—ŠÏØÖ/
+
+java:S1192¨"aDefine a constant instead of duplicating this literal "invalidArgumentException message" 4 times.(ûÁ‡¾8—ŠÏØÖ/
+o
+java:S1192w"RDefine a constant instead of duplicating this literal "SERVICE_EXCEPTION" 3 times.(ª³Ò™8˜ŠÏØÖ/
+f
+java:S11923"JDefine a constant instead of duplicating this literal "fileName1" 8 times.(¯òûC8˜ŠÏØÖ/
+v
+java:S1192o"YDefine a constant instead of duplicating this literal "serviceException message" 4 times.(§—ó›8˜ŠÏØÖ/
+g
+java:S11924"JDefine a constant instead of duplicating this literal "fileName2" 8 times.(‹§Ù¥8˜ŠÏØÖ/
+t
+java:S1192°"QDefine a constant instead of duplicating this literal "INVALID_ARGUMENT" 3 times.(“ÓÇ¨úÿÿÿÿ8˜ŠÏØÖ/
+h
+java:S11925"KDefine a constant instead of duplicating this literal "ClassName3" 8 times.(ûÉåÂ8™ŠÏØÖ/
+g
+java:S11925"JDefine a constant instead of duplicating this literal "fileName3" 8 times.(ûÉåÂ8™ŠÏØÖ/

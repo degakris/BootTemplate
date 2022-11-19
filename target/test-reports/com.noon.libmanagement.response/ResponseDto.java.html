@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ResponseDto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">LibraryManagement</a> &gt; <a href="index.source.html" class="el_package">com.noon.libmanagement.response</a> &gt; <span class="el_source">ResponseDto.java</span></div><h1>ResponseDto.java</h1><pre class="source lang-java linenums">package com.noon.libmanagement.response;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.noon.libmanagement.exceptions.CustomError;
+import com.noon.libmanagement.serializer.DateToTimeStampSerializer;
+import com.noon.libmanagement.serializer.TimestampToDateDeserializer;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.joda.time.DateTime;
+
+<span class="nc bnc" id="L14" title="All 54 branches missed.">@Data</span>
+<span class="nc" id="L15">@Builder</span>
+<span class="nc" id="L16">@NoArgsConstructor</span>
+<span class="nc" id="L17">@AllArgsConstructor</span>
+public class ResponseDto&lt;T&gt; {
+<span class="fc" id="L19">	private Boolean success;</span>
+<span class="pc" id="L20">	private String version = &quot;V1&quot;;</span>
+<span class="pc" id="L21">	@JsonSerialize(using = DateToTimeStampSerializer.class)</span>
+	@JsonDeserialize(using = TimestampToDateDeserializer.class)
+<span class="pc" id="L23">	private DateTime date = DateTime.now();</span>
+<span class="fc" id="L24">	private ClientMetaData clientMeta;</span>
+<span class="fc" id="L25">	private CustomError error;</span>
+<span class="fc" id="L26">	T data;</span>
+
+<span class="fc" id="L28">	public ResponseDto(T data) {</span>
+<span class="fc" id="L29">		this.success = true;</span>
+<span class="fc" id="L30">		this.data = data;</span>
+<span class="fc" id="L31">		clientMeta = new ClientMetaData(&quot;web_admin&quot;, &quot;&quot; + (DateTime.now().getMillis() / 1000));</span>
+<span class="fc" id="L32">	}</span>
+
+	public ResponseDto(T data, ClientMetaData clientMeta) {
+<span class="nc" id="L35">		this(data);</span>
+<span class="nc" id="L36">		this.clientMeta = clientMeta;</span>
+<span class="nc" id="L37">	}</span>
+
+	public ResponseDto(Boolean success, T data) {
+<span class="fc" id="L40">		this(data);</span>
+<span class="fc" id="L41">		this.success = success;</span>
+<span class="fc" id="L42">	}</span>
+
+	public ResponseDto(Boolean success, T data, CustomError customError) {
+<span class="fc" id="L45">		this(success, data);</span>
+<span class="fc" id="L46">		this.error = customError;</span>
+<span class="fc" id="L47">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

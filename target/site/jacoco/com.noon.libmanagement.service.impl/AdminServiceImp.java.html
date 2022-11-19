@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdminServiceImp.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">LibraryManagement</a> &gt; <a href="index.source.html" class="el_package">com.noon.libmanagement.service.impl</a> &gt; <span class="el_source">AdminServiceImp.java</span></div><h1>AdminServiceImp.java</h1><pre class="source lang-java linenums">package com.noon.libmanagement.service.impl;
+
+import com.noon.libmanagement.dto.BookDto;
+import com.noon.libmanagement.exceptions.InvalidArgumentException;
+import com.noon.libmanagement.exceptions.IllegalAccessException;
+import com.noon.libmanagement.exceptions.ServiceException;
+import com.noon.libmanagement.mapper.BookMapper;
+import com.noon.libmanagement.models.Admin;
+import com.noon.libmanagement.models.Book;
+import com.noon.libmanagement.models.Booking;
+import com.noon.libmanagement.repostotries.AdminRepository;
+import com.noon.libmanagement.repostotries.BookRepository;
+import com.noon.libmanagement.repostotries.BookingRepository;
+import com.noon.libmanagement.service.AdminService;
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L23">@RequiredArgsConstructor</span>
+public class AdminServiceImp implements AdminService {
+
+	private final AdminRepository adminRepository;
+	private final BookRepository bookRepository;
+	private final BookingRepository bookingRepository;
+	private final BookMapper bookMapper;
+
+	@Override
+	public Boolean addBook(final BookDto bookDto, final Integer adminId)
+			throws IllegalAccessException, InvalidArgumentException {
+<span class="fc" id="L34">		final Book book = bookMapper.getEntityFromDto(bookDto);</span>
+<span class="fc" id="L35">		final Optional&lt;Admin&gt; admin = adminRepository.findById(adminId);</span>
+<span class="pc bpc" id="L36" title="1 of 4 branches missed.">		if (admin.isPresent() &amp;&amp; admin.get().getIsActiveMember().equals(Boolean.TRUE)) {</span>
+<span class="fc" id="L37">			bookRepository.save(book);</span>
+<span class="fc" id="L38">			return Boolean.TRUE;</span>
+		}
+<span class="fc" id="L40">		throw new IllegalAccessException(&quot;invalid admin or admin inactive:&quot; + adminId);</span>
+	}
+
+	@Override
+	public Boolean addBook(final Integer bookingId, final Integer adminId, final Integer numberOfPieces)
+			throws IllegalAccessException, InvalidArgumentException {
+<span class="nc" id="L46">		final Optional&lt;Admin&gt; admin = adminRepository.findById(adminId);</span>
+<span class="nc bnc" id="L47" title="All 4 branches missed.">		if (admin.isPresent() &amp;&amp; admin.get().getIsActiveMember().equals(Boolean.TRUE)) {</span>
+<span class="nc" id="L48">			final Optional&lt;Book&gt; book = bookRepository.findById(bookingId);</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">			if (book.isPresent()) {</span>
+<span class="nc" id="L50">				int count = book.get().getCount();</span>
+<span class="nc" id="L51">				count = count + numberOfPieces;</span>
+<span class="nc" id="L52">				book.get().setCount(count);</span>
+<span class="nc" id="L53">				bookRepository.save(book.get());</span>
+<span class="nc" id="L54">				return Boolean.TRUE;</span>
+			}
+<span class="nc" id="L56">			throw new InvalidArgumentException(&quot;invalid bookId:&quot; + adminId);</span>
+		}
+<span class="nc" id="L58">		throw new IllegalAccessException(&quot;invalid admin or admin inactive:&quot; + adminId);</span>
+	}
+
+	@Override
+	public Boolean removeBook(final Integer bookId, final Integer adminId)
+			throws ServiceException {
+<span class="nc" id="L64">		final Optional&lt;Admin&gt; admin = adminRepository.findById(adminId);</span>
+<span class="nc bnc" id="L65" title="All 4 branches missed.">		if (admin.isPresent() &amp;&amp; admin.get().getIsActiveMember().equals(Boolean.TRUE)) {</span>
+<span class="nc" id="L66">			final List&lt;Booking&gt; booking = bookingRepository.findByBookId(bookId);</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">			if (CollectionUtils.isNotEmpty(booking))</span>
+<span class="nc" id="L68">				throw new ServiceException(</span>
+						&quot;already book was booked so that we could not able to delete for the bookId:&quot; + bookId);
+			else {
+<span class="nc" id="L71">				bookRepository.deleteById(bookId);</span>
+<span class="nc" id="L72">				return Boolean.TRUE;</span>
+			}
+		}
+<span class="nc" id="L75">		throw new IllegalAccessException(&quot;invalid admin or admin inactive:&quot; + adminId);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

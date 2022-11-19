@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MutableHttpServletRequest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">LibraryManagement</a> &gt; <a href="index.source.html" class="el_package">com.noon.libmanagement.interceptor.filter</a> &gt; <span class="el_source">MutableHttpServletRequest.java</span></div><h1>MutableHttpServletRequest.java</h1><pre class="source lang-java linenums">package com.noon.libmanagement.interceptor.filter;
+
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+@Primary
+@Component
+public class MutableHttpServletRequest extends HttpServletRequestWrapper {
+	private final Map&lt;String, String&gt; customHeaders;
+
+	public MutableHttpServletRequest(final HttpServletRequest request) {
+<span class="nc" id="L21">		super(request);</span>
+<span class="nc" id="L22">		this.customHeaders = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L23">	}</span>
+
+	public void putHeader(final String name, final String value) {
+<span class="nc" id="L26">		this.customHeaders.put(name, value);</span>
+<span class="nc" id="L27">	}</span>
+
+	@Override
+	public String getHeader(String name) {
+<span class="nc" id="L31">		final String headerValue = customHeaders.get(name);</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">		if (null != headerValue) {</span>
+<span class="nc" id="L33">			return headerValue;</span>
+		}
+<span class="nc" id="L35">		return ((HttpServletRequest) getRequest()).getHeader(name);</span>
+	}
+
+	@Override
+	public Enumeration&lt;String&gt; getHeaderNames() {
+<span class="nc" id="L40">		final Set&lt;String&gt; set = new HashSet&lt;&gt;(customHeaders.keySet());</span>
+<span class="nc" id="L41">		final Enumeration&lt;String&gt; headerNames = ((HttpServletRequest) getRequest()).getHeaderNames();</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">		while (headerNames.hasMoreElements()) {</span>
+<span class="nc" id="L43">			set.add(headerNames.nextElement());</span>
+		}
+<span class="nc" id="L45">		return Collections.enumeration(set);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
