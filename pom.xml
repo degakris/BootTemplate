@@ -16,7 +16,7 @@
 
 
     <properties>
-        <java.version>16</java.version>
+        <java.version>8</java.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <com.fasterxml.jackson.version>2.12.3</com.fasterxml.jackson.version>
