@@ -18,6 +18,7 @@ public class GuestBookingController {
 
 	@PostMapping(path = "api/v1/bookSlot")
 	public ResponseDto<Integer> bookingSlot(@RequestBody final BookingSlotDto bookingSlotDto) throws ServiceException {
+		System.out.println("dega");
 		return new ResponseDto<>(
 				guestBookingService.bookSlot(bookingSlotDto.getVehicleType(), bookingSlotDto.getFlatNumber()));
 	}
