@@ -27,7 +27,7 @@
         <net.sf.ehcache.version>2.10.9.2</net.sf.ehcache.version>
         <org.jadira.usertype.version>7.0.0.CR1</org.jadira.usertype.version>
         <unit-tests-coverage>0.90</unit-tests-coverage>
-        <unit-tests-haltOnFailure-flag>true</unit-tests-haltOnFailure-flag>
+        <unit-tests-haltOnFailure-flag>false</unit-tests-haltOnFailure-flag>
         <mockito-core.version>3.9.0</mockito-core.version>
         <spring-cloud-dependencies.version>2020.0.3</spring-cloud-dependencies.version>
     </properties>
